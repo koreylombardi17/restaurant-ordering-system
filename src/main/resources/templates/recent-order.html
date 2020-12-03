@@ -1,0 +1,41 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Recent Orders</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/css/table.css}">
+    </head>
+
+    <body>
+        <h2>Order Details</h2>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Food Item</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="foodItem : ${foodOrder.foodItems}">
+                        <td><span th:text="${foodItem.foodName}"></span></td>
+                        <td><span th:text="${foodItem.price}"></span></td>
+                        <td><span th:text="${foodItem.description}"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <form th:action="@{/reorder}" method="POST">
+                <input type="hidden" name="foodOrderID" th:value="${foodOrder.FoodOrderID}"/>
+                <input type="hidden" name="userID" th:value="${userID}"/>
+                <input type="hidden" name="customer" th:value="${customer}"/>
+                <button type="submit">Reorder and Pay</button>
+            </form>
+            <form th:action="@{/}" method="get">
+                <button type="submit" name="logout" value="logout">Logout</button>
+            </form>
+        </div>
+    </body>
+</html>

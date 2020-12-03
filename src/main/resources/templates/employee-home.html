@@ -1,0 +1,54 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en-US" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Employee Home Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/css/table.css}">
+    </head>
+
+    <body>
+        <header>
+            <h1>Active Food Orders</h1>
+        </header>
+        <div>
+            <form th:action="@{/}" method="get">
+                <button type="submit" name="logout" value="logout">Clock Out</button>
+            </form>
+        </div><br>
+        <div>
+            <table align="center">
+                <thead>
+                    <tr>
+                        <th>Order Number</th>
+                        <th>Food Items</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="foodOrder : ${foodOrders}">
+                        <td><span th:text="${foodOrder.foodOrderID}"></span></td>
+                        <td>
+                            <ul th:each="foodItem : ${foodOrder.foodItems}">
+                                <li th:text="${foodItem.foodName}"></li>
+                            </ul>
+                        </td>
+                        <form th:action="@{/update-status}" method="POST">
+                            <td>
+                                <select id="status" name="status">
+                                    <option th:each="status : ${statuses}" th:value="${status}" th:text="${status}" th:selected="${status} == ${foodOrder.status}"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="hidden" name="foodOrderID" th:value="${foodOrder.FoodOrderID}"/>
+                                <input type="hidden" name="status" th:value="${status}"/>
+                                <button type="submit">Update Status</button>
+                            </td>
+                        </form>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

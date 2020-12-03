@@ -1,0 +1,72 @@
+/* Tag Styles
+-------------------------------------------- */
+body {
+    color: mintcream;
+    text-align: center;
+    margin: 0;
+}
+
+input {
+    border: 2px;
+    border-style: solid;
+    border-radius: 8px;
+    padding: 3px 3px 3px 3px;
+    margin: 10px 0 10px 0;
+    max-width: 340px;
+    width: 85%;
+}
+
+h1 {
+    margin: 0 0 20px 0;
+    padding: 10px 20px;
+    font-size: 28px;
+    text-align: center;
+    font-family: 'Snell Roundhand', cursive;
+}
+
+header {
+    background: red;
+    color: #f7fff7;
+}
+
+h6 {
+    font-size: 8px;
+    color: #f7fff7;
+}
+
+footer {
+    background: forestgreen;
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+    width: 100%;
+    height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Class Styles
+-------------------------------------------- */
+.login-form-wrapper {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+.login-btn {
+    border: 2px;
+    border-style: solid;
+    border-radius: 8px;
+    padding: 3px 3px 3px 3px;
+    margin: 10px 0 10px 0;
+    width: fit-content;
+}
+
+.nav-btns {
+    border: 2px;
+    border-style: solid;
+    border-radius: 8px;
+    padding: 3px 3px 3px 3px;
+    margin: 10px 0 10px 0;
+    width: 135px;
+}

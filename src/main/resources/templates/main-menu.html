@@ -1,0 +1,97 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    
+    
+</head>
+    <title>Menu</title>   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/table.css}">
+</head>
+
+    <body>
+        <h2>Hello, <span th:text="${customer.firstName}"/>!</h2>
+        <span>
+            <form th:action="@{/menu/search-menu}" method="post">
+                <input type="hidden" name="userID" th:value="${customer.userID}"/>
+                <input name="searchTerm" placeholder="Search for Food Item"/>
+                <button type="submit" name="searchItems" value="searchItems">Search</button>
+            </form><br>
+            <form th:action="@{/menu/main-menu}" method="post">
+                <input type="hidden" name="userID" th:value="${customer.userID}"/>
+                <button type="submit" name="viewMenu" value="viewMenu">View Full Menu</button>
+            </form><br>
+        </span>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Food Item</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Add</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="foodItem : ${menu.menu}">
+                        <td><span th:text="${foodItem.foodName}"></span></td>
+                        <td><span th:text="${foodItem.price}"></span></td>
+                        <td><span th:text="${foodItem.description}"></span></td>
+                        <td>
+                            <form th:action="@{/menu/add-item-to-order}" method="POST">
+                                <input type="hidden" name="foodName" th:value="${foodItem.foodName}"/>
+                                <input type="hidden" name="userID" th:value="${customer.userID}"/>
+                                <button type="submit">Add</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h2>Shopping Cart</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Food Item</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="foodItem : ${customer.foodOrder.foodItems}">
+                        <td><span th:text="${foodItem.foodName}"></span></td>
+                        <td><span th:text="${foodItem.price}"></span></td>
+                        <td><span th:text="${foodItem.description}"></span></td>
+                        <td>
+                            <form th:action="@{/menu/remove-item-from-order}" method="POST">
+                                <input type="hidden" name="foodName" th:value="${foodItem.foodName}"/>
+                                <input type="hidden" name="userID" th:value="${customer.userID}"/>
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>Total = <span th:text="${customer.foodOrder.formattedTotal}"></span>$</h3>
+            <h3>Tax = <span th:text="${customer.foodOrder.formattedTax}"></span>$</h3>
+            <h3>Subtotal = <span th:text="${customer.foodOrder.formattedSubtotal}"></span>$</h3>
+            <div>
+                <form th:action="@{/menu/submit-order}" method="POST">
+                    <input type="hidden" name="userID" th:value="${customer.userID}"/>
+                    <button type="submit">Submit and Pay</button>
+                </form><br>
+                <form th:action="@{/view-recent-orders}" method="POST">
+                    <input type="hidden" name="userID" th:value="${customer.userID}"/>
+                    <input type="hidden" name="customer" th:value="${customer}"/>
+                    <button type="submit">View Recent Orders</button>
+                </form><br>
+            </div>
+        </div>
+        <form th:action="@{/}" method="get">
+            <button type="submit" name="logout" value="logout">Logout</button>
+        </form>
+    </body>
+</html>

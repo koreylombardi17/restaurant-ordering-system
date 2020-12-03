@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Recent Orders</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/css/table.css}">
+    </head>
+
+    <body>
+        <h2>Recent Orders</h2>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="foodOrder : ${foodOrders}">
+                        <td><span th:text="${foodOrder.orderDate}"></span></td>
+                        <td><span th:text="${foodOrder.formattedSubtotal}"></span></td>
+                        <td><span th:text="${foodOrder.status}"></span></td>
+                        <td>
+                            <form th:action="@{/view-recent-order}" method="POST">
+                                <input type="hidden" name="foodOrderID" th:value="${foodOrder.foodOrderID}"/>
+                                <input type="hidden" name="userID" th:value="${userID}"/>
+                                <input type="hidden" name="customer" th:value="${customer}"/>
+                                <button type="submit">Details</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <form th:action="@{/back-to-home-page}" method="post">
+                <input type="hidden" name="userID" th:value="${customer.userID}"/>
+                <button type="submit" name="backToHomePage" value="backToHomePage">Back to Home Page</button>
+            </form>
+            <form th:action="@{/}" method="get">
+                <button type="submit" name="logout" value="logout">Logout</button>
+            </form>
+        </div>
+    </body>
+</html>
