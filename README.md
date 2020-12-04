@@ -18,6 +18,7 @@ This restaurant ordering system is built to manage customer's food orders, and a
 * Spring Boot 2.4
 * Apache Maven 3.6.3
 * MySQL 8.0.21
+* Hibernate ORM
 * IntelliJ or any IDE with Maven support
 * Windows or Mac
 * Internet browser
