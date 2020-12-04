@@ -27,15 +27,25 @@
                     </tr>
                 </tbody>
             </table>
-            <form th:action="@{/reorder}" method="POST">
-                <input type="hidden" name="foodOrderID" th:value="${foodOrder.FoodOrderID}"/>
-                <input type="hidden" name="userID" th:value="${userID}"/>
-                <input type="hidden" name="customer" th:value="${customer}"/>
-                <button type="submit">Reorder and Pay</button>
-            </form>
-            <form th:action="@{/}" method="get">
-                <button type="submit" name="logout" value="logout">Logout</button>
-            </form>
+            <div>
+                <form th:action="@{/reorder}" method="POST">
+                    <input type="hidden" name="foodOrderID" th:value="${foodOrder.FoodOrderID}"/>
+                    <input type="hidden" name="userID" th:value="${userID}"/>
+                    <input type="hidden" name="customer" th:value="${customer}"/>
+                    <button type="submit">Reorder and Pay</button>
+                </form>
+            </div>
+            <div>
+                <form th:action="@{/view-recent-orders}" method="POST">
+                    <input type="hidden" name="userID" th:value="${userID}"/>
+                    <button type="submit">Back to Orders</button>
+                </form>
+            </div>
+            <div>
+                <form th:action="@{/}" method="get">
+                    <button type="submit" name="logout" value="logout">Logout</button>
+                </form>
+            </div>
         </div>
     </body>
 </html>
