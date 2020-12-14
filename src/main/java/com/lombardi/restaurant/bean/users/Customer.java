@@ -1,6 +1,7 @@
 package com.lombardi.restaurant.bean.users;
 
 import com.lombardi.restaurant.bean.FoodOrder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
 import java.util.ArrayList;

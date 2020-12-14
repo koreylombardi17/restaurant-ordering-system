@@ -1,36 +1,43 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en-US" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="Restaurant Software" content="Lombardi's Italian Restaurant">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Lombardi's Italian Restaurant, a quick and easy way to order your food online.">
-        <title>Lombardi's Italian Restaurant Ordering System</title>
-        <link rel="stylesheet" th:href="@{/css/index.css}">
-    </head>
-    <body>
-        <header>
-            <h1>Lombardi's Italian Restaurant</h1>
-        </header>
-        <div class="login-form-wrapper">
-            <form th:action="@{/login}" method="post">
-                <input type="email" name="email" placeholder="Email" required/>
-                <br>
-                <input type="password" name="password" placeholder="Password" required/>
-                <div style="color: red;" th:text="${invalid}"></div>
-                <button class="login-btn" type="submit">Log In</button>
-            </form>
-            <div class="nav-btns-wrapper">
-                <form th:action="@{/create-customer}" method="get">
-                    <button class="nav-btns">Create New Account</button>
-                </form>
-                <form th:action="@{/main-menu}" method="get">
-                    <button class="nav-btns">Continue as Guest</button>
-                </form>
-            </div>
-        </div>
-        <footer>
-            <h6>Lombardi's Italian Restaurant</h6>
-        </footer>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en-US" dir="ltr" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org
+http://www.thymeleaf.org ">
+
+<head>
+    <link>
+    <meta charset="utf-8">
+    <meta name="Restaurant Software" content="Lombardi's Italian Restaurant">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Lombardi's Italian Restaurant, a quick and easy way to order your food online.">
+    <title>Lombardi's Italian Restaurant Ordering System</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+
+<body>
+<header>
+    <h1>Lombardi's Italian Restaurant</h1>
+</header>
+<div class="login-form-wrapper">
+    <form th:action="@{/login}" method="post">
+        <input type="email" name="email" placeholder="Email" required/>
+        <br>
+        <input type="password" name="password" placeholder="Password" required/>
+        <div style="color: red;" th:text="${invalid}"></div>
+        <button class="login-btn" type="submit">Log In</button>
+    </form>
+    <div class="nav-btns-wrapper">
+        <form th:action="@{/create-customer}" method="get">
+            <button class="nav-btns">Create New Account</button>
+        </form>
+        <form th:action="@{/main-menu}" method="get">
+            <button class="nav-btns">Continue as Guest</button>
+        </form>
+    </div>
+</div>
+<footer>
+    <h6>Lombardi's Italian Restaurant</h6>
+</footer>
+</body>
+
 </html>

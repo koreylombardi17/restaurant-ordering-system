@@ -1,5 +1,7 @@
 package com.lombardi.restaurant.bean.users;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 

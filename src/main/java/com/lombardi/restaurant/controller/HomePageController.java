@@ -6,12 +6,10 @@ import com.lombardi.restaurant.bean.Menu;
 import com.lombardi.restaurant.bean.users.Customer;
 import com.lombardi.restaurant.bean.users.Employee;
 import com.lombardi.restaurant.bean.users.User;
-import com.lombardi.restaurant.service.CustomerServiceImpl;
-import com.lombardi.restaurant.service.FoodItemServiceImpl;
-import com.lombardi.restaurant.service.FoodOrderServiceImpl;
-import com.lombardi.restaurant.service.UserServiceImpl;
+import com.lombardi.restaurant.service.*;
 import com.lombardi.restaurant.validator.CreateCustomerErrorMsg;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,30 +55,52 @@ public class HomePageController {
         return "main-menu";
     }
 
+//    @PostMapping("/login")
+//    @Transactional
+//    public String login(@RequestParam("email") String email,
+//                        @RequestParam("password") String password,
+//                        RedirectAttributes attributes) {
+//        if (userService.successfulLogin(email, password)) {
+//            User user = userService.findUserByEmail(email);
+//            if (user.getClass().equals(Customer.class)) {
+//                Customer customer = (Customer)user;
+//                // This line of code loads the customers order
+//                System.out.println(customer.getFoodOrder());
+//                attributes.addFlashAttribute("customer", customer);
+//                return "redirect:/main-menu";
+//            }else{
+//                Employee employee = (Employee)user;
+//                attributes.addFlashAttribute("employee", employee);
+//                return "redirect:/employee-home";
+//            }
+//        }else{
+//            String message = "Invalid email or password, please try again.";
+//            attributes.addFlashAttribute("invalid", message);
+//        }
+//        return "redirect:/";
+//    }
+
     @PostMapping("/login")
     @Transactional
     public String login(@RequestParam("email") String email,
                         @RequestParam("password") String password,
                         RedirectAttributes attributes) {
         if (userService.successfulLogin(email, password)) {
-            User user = userService.findUserByEmail(email);
-            if (user.getClass().equals(Customer.class)) {
-                Customer customer = (Customer)user;
-                // This line of code loads the customers order
-                System.out.println(customer.getFoodOrder());
-                attributes.addFlashAttribute("customer", customer);
+            User user = (User) userService.loadUserByUsername(email);
+            attributes.addFlashAttribute("customer", user);
                 return "redirect:/main-menu";
-            }else{
-                Employee employee = (Employee)user;
-                attributes.addFlashAttribute("employee", employee);
-                return "redirect:/employee-home";
-            }
         }else{
             String message = "Invalid email or password, please try again.";
             attributes.addFlashAttribute("invalid", message);
+            System.out.println("error with login");
         }
         return "redirect:/";
     }
+
+//    @PostMapping("/logout")
+//    public String logout(){
+//        return "redirect:/";
+//    }
 
     @GetMapping("/create-customer") // Mapping for the home page
     public String home(Model model) {
