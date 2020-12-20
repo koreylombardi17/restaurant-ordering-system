@@ -14,45 +14,31 @@ public class FoodOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "FoodOrderID")
     private Integer foodOrderID;
-
-    @Column(name = "Total")
     private Float total;
-
-    @Column(name = "Tax")
     private Float tax;
-
-    @Column(name = "Subtotal")
     private Float subtotal;
-
-    @Column(name = "OrderDate")
     private LocalDate orderDate;
-
-    @Column(name = "Status")
     private String status;
 
     @OneToOne(mappedBy = "foodOrder")
     private Customer customer;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "OrdersFoodItems",
-            joinColumns = @JoinColumn(name = "FoodOrderID",
-                    referencedColumnName = "FoodOrderID"),
-            inverseJoinColumns = @JoinColumn(name = "FoodItemID",
-                    referencedColumnName = "FoodItemID"))
+    @JoinTable(name = "ordersFoodItems",
+            joinColumns = @JoinColumn(name = "foodOrderID",
+                    referencedColumnName = "foodOrderID"),
+            inverseJoinColumns = @JoinColumn(name = "foodItemID",
+                    referencedColumnName = "foodItemID"))
     @OrderColumn
     private List<FoodItem> foodItems = new ArrayList<>();
 
     @Transient
     private String formattedSubtotal;
-
     @Transient
     private String formattedTax;
-
     @Transient
     private String formattedTotal;
-
     @Transient
     private NumberFormat formatter = NumberFormat.getCurrencyInstance();
 

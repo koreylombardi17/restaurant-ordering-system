@@ -6,17 +6,10 @@ import javax.persistence.*;
 public class FoodItem {
 
     @Id
-    @Column(name = "FoodItemID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer foodItemID;
-
-    @Column(name = "FoodName")
     private String foodName;
-
-    @Column(name = "Price")
     private Float price;
-
-    @Column(name = "Description")
     private String description;
 
     public FoodItem() {

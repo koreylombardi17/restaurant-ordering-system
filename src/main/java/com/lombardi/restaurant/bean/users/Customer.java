@@ -1,7 +1,6 @@
 package com.lombardi.restaurant.bean.users;
 
 import com.lombardi.restaurant.bean.FoodOrder;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,22 +10,25 @@ import java.util.List;
 public class Customer extends User{
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "CustomersOrders",
-            joinColumns = @JoinColumn(name = "UserID",
-                    referencedColumnName = "UserID"),
-            inverseJoinColumns = @JoinColumn(name = "FoodOrderID",
-                    referencedColumnName = "FoodOrderID"))
+    @JoinTable(name = "customersOrders",
+            joinColumns = @JoinColumn(name = "userID",
+                    referencedColumnName = "userID"),
+            inverseJoinColumns = @JoinColumn(name = "foodOrderID",
+                    referencedColumnName = "foodOrderID"))
     List<FoodOrder> foodOrders = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "FoodOrderID")
+    @JoinColumn(name = "foodOrderID")
     private FoodOrder foodOrder;
 
     public Customer() {
         super();
     }
 
-    public Customer(String firstName, String lastName, String email, String password) {
+    public Customer(String firstName,
+                    String lastName,
+                    String email,
+                    String password) {
         super(firstName, lastName, email, password);
         this.foodOrder = new FoodOrder("Not Submitted");
     }

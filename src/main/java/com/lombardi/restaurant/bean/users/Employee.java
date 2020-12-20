@@ -1,20 +1,20 @@
 package com.lombardi.restaurant.bean.users;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
 public class Employee extends User{
 
-    @Column(name = "PayRate")
     private Float payRate;
 
     public Employee() {
     }
 
-    public Employee(String firstName, String lastName, String email, String password, Float payRate) {
+    public Employee(String firstName,
+                    String lastName,
+                    String email,
+                    String password,
+                    Float payRate) {
         super(firstName, lastName, email, password);
         this.payRate = payRate;
     }
