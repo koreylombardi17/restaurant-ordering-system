@@ -21,6 +21,7 @@ public class EmployeeController {
 
     @GetMapping("/employee-home")
     public String employeeHome(Model model) {
+
         List<FoodOrder> foodOrders = foodOrderService.getActiveFoodOrders();
         List<String> statuses = Arrays.asList("Received Order", "Preparing Order", "Order Done", "Picked Up");
         model.addAttribute("statuses", statuses);

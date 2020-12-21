@@ -11,9 +11,9 @@ public class Customer extends User{
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "customersOrders",
-            joinColumns = @JoinColumn(name = "userID",
+                joinColumns = @JoinColumn(name = "userID",
                     referencedColumnName = "userID"),
-            inverseJoinColumns = @JoinColumn(name = "foodOrderID",
+                inverseJoinColumns = @JoinColumn(name = "foodOrderID",
                     referencedColumnName = "foodOrderID"))
     List<FoodOrder> foodOrders = new ArrayList<>();
 
@@ -22,7 +22,7 @@ public class Customer extends User{
     private FoodOrder foodOrder;
 
     public Customer() {
-        super();
+
     }
 
     public Customer(String firstName,
